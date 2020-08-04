@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.21'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id 'net.researchgate.release' version '2.8.1'
+}
+
+group 'org.ee'
+
+release {
+    newVersionCommitMessage = '[ci skip] [Gradle Release Plugin] - new version commit: '
+    buildTasks = ['fatJar']
+}
+
+
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile group: 'org.igniterealtime.smack', name: 'smack-tcp', version: '4.3.4'
+    compile group: 'org.igniterealtime.smack', name: 'smack-core', version: '4.3.4'
+    compile group: 'org.igniterealtime.smack', name: 'smack-extensions', version: '4.3.4'
+    compile group: 'org.igniterealtime.smack', name: 'smack-java7', version: '4.3.4'
+}
+buildSearchableOptions {
+    enabled = false
+}
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2020.1'
+}
+patchPluginXml {
+    changeNotes """
+      Initial beta release of the plugin.It supports only selection and cursor"""
+}
+
+task fatJar(type: Jar) {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+test {
+}
+
+

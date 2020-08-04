@@ -1,0 +1,12 @@
+<idea-plugin url="https://www.jetbrains.com/idea">
+    <id>org.ee.pearl</id>
+    <name>Pearl Live Code Share</name>
+    <vendor email="kwaghmode@equalexperts.com" url="http://www.equalexperts.com">Equal Experts</vendor>
+    <depends>com.intellij.modules.platform</depends>
+    <description>This plugin is developed for making pair/mob pairing efficient using any xmpp server</description>
+    <change-notes>Initial release of the plugin.It supports selection and cursor</change-notes>
+    <version>1.0.0</version>
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="Activity"/>
+    </extensions>
+</idea-plugin>
