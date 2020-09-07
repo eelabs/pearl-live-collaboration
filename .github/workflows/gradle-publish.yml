@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      name: Configure username
       run: |
         git config --local user.email "${{ secrets.GH_EMAIL }}"
         git config --local user.name "${{ secrets.GH_USERNAME }}"
