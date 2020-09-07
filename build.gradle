@@ -8,6 +8,9 @@ plugins {
 group 'org.ee'
 
 release {
+    git {
+        requireBranch = 'setup-build'
+    }
     newVersionCommitMessage = '[Gradle Release Plugin] - new version commit: '
     buildTasks = ['fatJar']
 }
@@ -41,9 +44,11 @@ buildSearchableOptions {
 }
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2020.1'
+    version '2020.2'
 }
 patchPluginXml {
+    sinceBuild '201'
+    untilBuild '202'
     changeNotes """
       Initial beta release of the plugin.It supports only selection and cursor"""
 }
