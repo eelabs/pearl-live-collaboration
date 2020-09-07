@@ -20,5 +20,5 @@ jobs:
       run: gradle fatJar
     - uses: actions/upload-artifact@v2
       with:
-        name: Package
-        path: build/libs
+        name: pearl.jar
+        path: build/libs/pearl*.jar
