@@ -8,7 +8,7 @@ plugins {
 group 'org.ee'
 
 release {
-    newVersionCommitMessage = '[ci skip] [Gradle Release Plugin] - new version commit: '
+    newVersionCommitMessage = '[Gradle Release Plugin] - new version commit: '
     buildTasks = ['fatJar']
 }
 
