@@ -1,9 +1,10 @@
 # pearl-live-collaboration
-pearl-live-collaboration is an Intellij IDEA plugin to collaborate with team members in a pair/mob programming session. 
+
 
 ## What is Pearl?
-Pearl plugin will enable you to start a live code session with your colleagues,
-Syncs the code real time between the team during the session,
+pearl-live-collaboration is an Intellij IDEA plugin to collaborate with team members in a pair/mob programming session. 
+It will enable you to start a live code session with your colleagues,
+syncs the code in real time among the team members,
 thus enabling you to work effortlessly from your own machine your IDE without screen share.
 To make your experience easy it will also show you the list of devs on the session and where they are in the code.
 This will not only save your bandwidth, but also the time you spend trying to convey your point to the driver. 
