@@ -8,9 +8,6 @@ plugins {
 group 'org.ee'
 
 release {
-    git {
-        requireBranch = 'setup-build'
-    }
     newVersionCommitMessage = '[Gradle Release Plugin] - new version commit: '
     buildTasks = ['fatJar']
 }
