@@ -1,9 +1,16 @@
 # pearl-live-collaboration
 pearl-live-collaboration is an Intellij IDEA plugin to collaborate with team members in a pair/mob programming session. 
 
-## How to install pearl-live-collaboration plugin?
+## What is Pearl?
+Pearl plugin will enable you to start a live code session with your colleagues,
+Syncs the code real time between the team during the session,
+thus enabling you to work effortlessly from your own machine your IDE without screen share.
+To make your experience easy it will also show you the list of devs on the session and where they are in the code.
+This will not only save your bandwidth, but also the time you spend trying to convey your point to the driver. 
+
+How to install pearl-live-collaboration plugin?
 **pearl-live-collaboration plugin is compatible with Intellij-IDEA 2020.1**
-- Download the plugin jar from here.
+- Download the plugin jar from [here](https://github.com/eelabs/pearl-live-collaboration/suites/1159657964/artifacts/16790954).
 - Go to Intellj IDEA Preferences(MacOS) or Settings(Windows/Linux) -> Plugins
 - Click on the gear icon
 - Select the downloaded jar file
