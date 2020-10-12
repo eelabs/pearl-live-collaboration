@@ -12,8 +12,8 @@ import smack.Subjects
 import java.util.concurrent.ConcurrentHashMap
 
 
-class Registration(private val project: Project, private var smack: Smack, private val users: Users,
-                   private val presence: Presence) : Disposable {
+class Registration constructor(private val project: Project, private var smack: Smack, private val users: Users,
+                               private val presence: Presence) : Disposable {
     private var editor = FileEditorManager.getInstance(project).selectedTextEditor
     var isReadOnly: Boolean = true
     private var document = Document(project, editor, smack, users, isReadOnly)
@@ -105,7 +105,7 @@ class Registration(private val project: Project, private var smack: Smack, priva
                         document.modifyDocument(message)
                     }
                     Subjects.sync_file -> {
-                        fileOps.syncFile(message)
+                        fileOps.syncFile(editor?.document!!, message)
                     }
                     Subjects.user_availability -> {
                         presence.sendPresence(from)

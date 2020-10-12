@@ -1,4 +1,5 @@
 import Utility.relativePath
+import com.intellij.openapi.editor.Document
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
@@ -19,8 +20,8 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 
-class FileOps(private val project: Project, private val editor: Editor?, private val smack: Smack,
-              private val users: Users) {
+class FileOps constructor(private val project: Project, private val editor: Editor?, private val smack: Smack,
+                          private val users: Users) {
     fun registerFileSync(messageBusConnection: MessageBusConnection) {
         messageBusConnection.subscribe(VirtualFileManager.VFS_CHANGES, object : BulkFileListener {
             override fun after(events: MutableList<out VFileEvent>) {
@@ -122,7 +123,8 @@ class FileOps(private val project: Project, private val editor: Editor?, private
 
     }
 
-    fun syncFile(message: String) {
+
+    fun syncFile(document: Document, message: String) {
         val fileDetails = GsonSerializer.fromJson<FileDetails>(message)
         val filePath = project.basePath + fileDetails.filePath
         val file = LocalFileSystem.getInstance().findFileByPath(filePath)
@@ -132,7 +134,10 @@ class FileOps(private val project: Project, private val editor: Editor?, private
             }
         } else
             Utility.write(project) {
-                file.setBinaryContent(fileDetails.docText.toByteArray(file.charset))
+                val originalContent = document.text
+                if (originalContent != fileDetails.docText) {
+                    file.setBinaryContent(fileDetails.docText.toByteArray(file.charset))
+                }
             }
     }
 
