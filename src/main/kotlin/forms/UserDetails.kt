@@ -25,12 +25,14 @@ class UserDetails(project: Project) {
 
     init {
         Utility.suppressException {
-            val properties = Properties()
             val inputStream = this::class.java.getResourceAsStream("local.properties")
-            properties.load(inputStream)
-            username?.text = properties["userName"] as String
-            password?.text = properties["password"] as String
-            domain?.text = properties["domain"] as String
+            if (inputStream != null) {
+                val properties = Properties()
+                properties.load(inputStream)
+                username?.text = properties["userName"] as String
+                password?.text = properties["password"] as String
+                domain?.text = properties["domain"] as String
+            }
         }
 
         login!!.addActionListener { _: ActionEvent? ->

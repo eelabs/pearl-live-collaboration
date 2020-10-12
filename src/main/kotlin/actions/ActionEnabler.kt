@@ -20,9 +20,17 @@ object ActionEnabler {
         e.project?.let {
             val editor = FileEditorManager.getInstance(it).selectedTextEditor
             when (editor?.document?.isWritable) {
-                true -> e.presentation.text = "Release Lock"
-                false -> e.presentation.text = "Take Lock"
+                true -> enableReleaseLock(e)
+                false -> enableTakeLock(e)
             }
         }
+    }
+
+    fun enableTakeLock(e: AnActionEvent) {
+        e.presentation.isEnabledAndVisible = e.presentation.text != "Release Lock"
+    }
+
+    fun enableReleaseLock(e: AnActionEvent) {
+        e.presentation.isEnabledAndVisible = e.presentation.text != "Take Lock"
     }
 }

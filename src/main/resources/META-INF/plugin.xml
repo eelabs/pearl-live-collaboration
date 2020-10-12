@@ -9,4 +9,14 @@
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="Activity"/>
     </extensions>
+    <actions>
+        <action class="actions.LockAction" id="Take Lock" text="Take Lock">
+            <keyboard-shortcut first-keystroke="control alt T" second-keystroke="L" keymap="$default"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        <action class="actions.LockAction" id="Release Lock" text="Release Lock">
+            <keyboard-shortcut first-keystroke="control alt R" second-keystroke="L" keymap="$default"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>

@@ -1,18 +1,19 @@
 package actions
 
-import windows.DialogBox
 import FileOp
 import Registration
-import smack.Smack
 import Users
 import Utility
-import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.actionSystem.AnAction
+import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
 import org.jivesoftware.smack.packet.Message
+import smack.Smack
 import smack.Subjects
+import windows.DialogBox
 
-class LockAction : AnAction("Take Lock", "Get or Release lock for editing", null) {
+class LockAction : AnAction() {
     override fun update(e: AnActionEvent) {
         ActionEnabler.changeVisibility(e)
         ActionEnabler.changeActionText(e)
@@ -33,13 +34,13 @@ class LockAction : AnAction("Take Lock", "Get or Release lock for editing", null
                         true
                     } else {
                         sendLockStatus(smack, true, users)
-                        this.templatePresentation.text = "Release Lock"
+                        ActionEnabler.enableReleaseLock(e)
                         false
                     }
                 }
                 "Release Lock" -> {
                     sendLockStatus(smack, false, users)
-                    this.templatePresentation.text = "Take Lock"
+                    ActionEnabler.enableTakeLock(e)
                     true
                 }
                 else -> true
@@ -48,7 +49,7 @@ class LockAction : AnAction("Take Lock", "Get or Release lock for editing", null
             smack.loggedInUser?.hasTakenLock = !isReadOnly
             registration.changeEditor(editor!!)
             val file = FileEditorManager.getInstance(project).selectedEditor?.file
-            registration.fileOps.sendFileChange(file!!, editor.document.text, FileOp.Modification,isReadOnly)
+            registration.fileOps.sendFileChange(file!!, editor.document.text, FileOp.Modification, isReadOnly)
         }
     }
 
@@ -62,17 +63,6 @@ class LockAction : AnAction("Take Lock", "Get or Release lock for editing", null
 
 
     companion object {
-        fun register() {
-            val matchingActions = ActionManager.getInstance().getActionIds("Lock")
-            if (!matchingActions.contains("Lock")) {
-                val lockAction = LockAction()
-                ActionManager.getInstance().registerAction("Lock", lockAction)
-                val group = ActionManager.getInstance().getAction("EditorPopupMenu") as DefaultActionGroup
-                group.add(lockAction, Constraints(Anchor.FIRST, null))
-            }
-
-        }
-
         fun changeCollaboratorLockStatus(project: Project, user: String, message: String) {
             val lockTaken = message.toBoolean()
             val users = Users.get(project)!!
