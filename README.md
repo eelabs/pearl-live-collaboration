@@ -11,7 +11,7 @@ This will not only save your bandwidth, but also the time you spend trying to co
 
 How to install pearl-live-collaboration plugin?
 **pearl-live-collaboration plugin is compatible with Intellij-IDEA 2020.2**
-- Download the plugin jar from [here](https://github.com/eelabs/pearl-live-collaboration/suites/1325283131/artifacts/21169958).
+- Download the plugin jar from [here](https://github.com/eelabs/pearl-live-collaboration/suites/1329999906/artifacts/21319092).
 - Go to Intellj IDEA Preferences(MacOS) or Settings(Windows/Linux) -> Plugins
 - Click on the gear icon
 - Select the downloaded jar file
