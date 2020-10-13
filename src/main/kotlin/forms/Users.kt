@@ -1,4 +1,5 @@
 import Utility.toEntityBear
+import actions.LockStatus
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.RegisterToolWindowTask
@@ -86,6 +87,7 @@ class Users(private val presence: Presence, private val smack: Smack, private va
 
     fun removeUser(name: String) {
         userListModel.removeElement(getUser(name))
+        changeLockStatusOnUserChange()
     }
 
     fun addUser(name: String, hasTakenLock: Boolean) {
@@ -93,6 +95,16 @@ class Users(private val presence: Presence, private val smack: Smack, private va
             val user = User(name, hasTakenLock)
             user.setColor(userListModel.size())
             userListModel.addElement(user)
+        }
+        changeLockStatusOnUserChange()
+    }
+
+    private fun changeLockStatusOnUserChange() {
+        val anyDriver = getUsers().find { it.hasTakenLock }
+        if (anyDriver != null) {
+            LockStatus.lockTaken(project, anyDriver.name)
+        } else {
+            LockStatus.lockOpen(project)
         }
     }
 

@@ -13,6 +13,7 @@ import smack.Smack
 import smack.Subjects
 import windows.DialogBox
 
+
 class LockAction : AnAction() {
     override fun update(e: AnActionEvent) {
         ActionEnabler.changeVisibility(e)
@@ -33,12 +34,14 @@ class LockAction : AnAction() {
                         DialogBox("User ${driver.name} has taken lock", "Ok", title = "Lock Status").show()
                         true
                     } else {
+                        LockStatus.lockTaken(project, "you")
                         sendLockStatus(smack, true, users)
                         ActionEnabler.enableReleaseLock(e)
                         false
                     }
                 }
                 "Release Lock" -> {
+                    LockStatus.lockOpen(project)
                     sendLockStatus(smack, false, users)
                     ActionEnabler.enableTakeLock(e)
                     true
@@ -66,7 +69,12 @@ class LockAction : AnAction() {
         fun changeCollaboratorLockStatus(project: Project, user: String, message: String) {
             val lockTaken = message.toBoolean()
             val users = Users.get(project)!!
-            users.getUser(user)!!.hasTakenLock = lockTaken
+            val lockTakenByUser = users.getUser(user)!!
+            lockTakenByUser.hasTakenLock = lockTaken
+            if (lockTaken)
+                LockStatus.lockTaken(project, lockTakenByUser.name)
+            else
+                LockStatus.lockOpen(project)
 
         }
 

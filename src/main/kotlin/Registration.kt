@@ -1,4 +1,5 @@
 import actions.LockAction
+import actions.LockStatus
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileEditorManager
@@ -36,6 +37,7 @@ class Registration constructor(private val project: Project, private var smack: 
     }
 
     override fun dispose() {
+        LockStatus.dispose(project)
         editor?.markupModel?.removeAllHighlighters()
         presence.sendDisconnectedMessage(users)
         this.document.dispose()
