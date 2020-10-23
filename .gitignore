@@ -1,8 +1,24 @@
-.idea
-.gradle
+# Gradle
 build
-*.hprof
+.gradle
 local.properties
-.DS_Store
+
+# IntelliJ IDEA
+.idea
 out/
+
+# JVM
+*.hprof
+
+# Mac OS X
+.DS_Store
+
+# Make
+.help.mk
+.makehelp
+
+# Maven
 settings.xml
+
+# Vim
+*.swp

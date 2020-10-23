@@ -29,12 +29,12 @@ compileTestKotlin {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile group: 'org.igniterealtime.smack', name: 'smack-tcp', version: '4.3.4'
-    compile group: 'org.igniterealtime.smack', name: 'smack-core', version: '4.3.4'
-    compile group: 'org.igniterealtime.smack', name: 'smack-extensions', version: '4.3.4'
-    compile group: 'org.igniterealtime.smack', name: 'smack-java7', version: '4.3.4'
+    implementation group: 'org.igniterealtime.smack', name: 'smack-tcp', version: '4.3.4'
+    implementation group: 'org.igniterealtime.smack', name: 'smack-core', version: '4.3.4'
+    implementation group: 'org.igniterealtime.smack', name: 'smack-extensions', version: '4.3.4'
+    implementation group: 'org.igniterealtime.smack', name: 'smack-java7', version: '4.3.4'
 }
 buildSearchableOptions {
     enabled = false
@@ -58,4 +58,7 @@ task fatJar(type: Jar) {
 test {
 }
 
-
+wrapper {
+    gradleVersion '6.7'
+    distributionType = Wrapper.DistributionType.ALL
+}
